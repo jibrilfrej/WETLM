@@ -298,7 +298,6 @@ int Embedding::load_Word2VecBinFormat (
 const char* file_name ///< the name of the binary file
 	)
 {
-	int k = 0;
 	cout<<"Before opening binary file"<<endl;
 	// Open the binary file
 	FILE *f = fopen(file_name, "rb");
@@ -320,7 +319,7 @@ const char* file_name ///< the name of the binary file
 	vocab.resize(words); 
 	cout<<"After allocation of the vocab"<<endl;
 	// Reserve memory for the matrix of embedded vectors 
-	M.resize(words*size); 
+	M.resize(words*size);
 	cout<<"After allocation of the vectors"<<endl;
 	//separator char between the word and the embedded vector
 	char ch;
@@ -340,16 +339,12 @@ const char* file_name ///< the name of the binary file
 		for (size_t a = 0; a < size; a++) len += M[a + b * size] * M[a + b * size];
 		len = sqrt(len);
 		for (size_t a = 0; a < size; a++) M[a + b * size] /= len;
-		for(size_t a = 0; a < size; a++){
-
-			cout << M[a + b * size] <<endl;
-			cin >> k;		
-		} 
+		 
   	}
 	cout<<endl;
 	fclose(f);
 	
-	save_voc("non_stemmed_voc");
+	//save_voc("non_stemmed_voc");
 
 	return 0;
 }
@@ -389,7 +384,7 @@ float* Embedding::get(const char* word){
 
 	}
 
-	*/
+	
 	
 	if( ( (term[0]) > 96 && (term[0]) < 123 ) ){
 
@@ -404,7 +399,7 @@ float* Embedding::get(const char* word){
 		}
 
 	}
-		
+	*/	
 	
 	
 	return nullptr;
@@ -439,7 +434,7 @@ float Embedding::cosine(const char* word1, const char* word2){
 
 	float *vect1 = get(word1);
 	float *vect2 = get(word2);
-	if(vect1 == nullptr ||vect2 == nullptr){return 0;}
+	if(vect1 == nullptr || vect2 == nullptr){return 0;}
 	float dist = 0;
 	for(unsigned int i = 0; i < size ; i++){
 	
